@@ -10,6 +10,8 @@ type Props = {
 export const SectionPreview = (props: Props) => {
   const { data } = props;
 
+  const items = data?.items as SectionPreviewType[];
+
   const subTitle = (item: SectionPreviewType) => {
     const dates = [item?.startDate, item?.present && "Present", item?.endDate]
       .filter(Boolean)
@@ -22,10 +24,10 @@ export const SectionPreview = (props: Props) => {
 
   return (
     <div className="space-y-2">
-      {data?.items?.length > 0 && (
+      {items?.length > 0 && (
         <>
           <SectionHeader title={data?.title} className="truncate" />
-          {data?.items?.map((item, index) => (
+          {items?.map((item, index) => (
             <div key={index} className="text-xs flex flex-col gap-2">
               <div className="flex flex-col">
                 <span className="truncate font-semibold">

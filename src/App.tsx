@@ -14,7 +14,6 @@ import {
   EducationPreview,
   EmploymentsForm,
   EmploymentsPreview,
-  PDFDownload,
 } from "@/components";
 import {
   ComponentSection,
@@ -151,7 +150,6 @@ function App() {
 
         <div className="bg-slate-100 overflow-y-auto p-8">
           <ResumePreview ref={previewRef} data={data} sections={sections} />
-          <PDFDownload previewRef={previewRef} />
         </div>
       </div>
     </div>

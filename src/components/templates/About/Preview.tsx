@@ -13,10 +13,10 @@ const Preview = (props: Props) => {
 
   const value = data?.items?.[0] as React.ReactNode;
   return (
-    <>
+    <div className="space-y-2">
       <SectionHeader title={DEAFAULT_ABOUT_TITLE} />
       <DescreiptionPreview value={value} />
-    </>
+    </div>
   );
 };
 
