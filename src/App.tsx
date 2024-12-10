@@ -26,7 +26,6 @@ import { GripVertical } from "lucide-react";
 function App() {
   const savedData = JSON.parse(localStorage.getItem("formData") || "{}");
 
-  const previewRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<Mixed>(savedData);
   const [sections, setSections] = useState<ComponentSection[]>([
     {
@@ -149,7 +148,7 @@ function App() {
         </div>
 
         <div className="bg-slate-100 overflow-y-auto p-8">
-          <ResumePreview ref={previewRef} data={data} sections={sections} />
+          <ResumePreview data={data} sections={sections} />
         </div>
       </div>
     </div>
