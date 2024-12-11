@@ -15,6 +15,10 @@ This challenge aimed to build a resume builder UI inspired by the provided demo.
 
 A key aspect of this challenge was the effective use of Large Language Model (LLM) coding assistants (like ChatGPT or Claude) to expedite development. A recording of all LLM prompts used is included as part of the deliverables.
 
+## Live Demo
+[View the live demo here](https://resume-builder-iv9z.onrender.com/)
+
+
 ## Features
 
 - **Resume Editor**: Users can fill out different sections of their resume, including basic details, work experience, education, skills, and more.
