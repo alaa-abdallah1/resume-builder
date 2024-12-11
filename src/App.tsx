@@ -129,37 +129,46 @@ function App() {
   const handleRemoveSection = (id: string) => {
     const updatedSections = sections.filter(section => section.id !== id);
     setSections(updatedSections);
-    setSectionsData(updatedSections);
+    setSectionsData(updatedSections); // Update the saved sections data
   };
 
   useEffect(() => {
     const savedSections = getSectionsData();
-    if (savedSections) {
-      const addedSections = savedSections.filter(
-        item => !sections.find(section => section.id.includes(item.id))
+    if (savedSections?.length > 0) {
+      // Create a Map of current sections for faster lookup (to prevent duplicates)
+      const savedSectionsMap = new Map(
+        savedSections.map(section => [section.id, section])
       );
 
-      const formatAddedSections = addedSections?.map(({ id, title }) => {
+      // Remove sections that are in 'sections' but not in 'savedSections'
+      const filteredSections = sections.filter(section =>
+        savedSectionsMap.has(section.id)
+      );
+
+      // Create an array for new sections that are in 'savedSections' but not in 'sections'
+      const newSections = savedSections.filter(
+        item => !sections.some(section => section.id === item.id)
+      );
+
+      // Format new sections with their components and previews
+      const formattedNewSections = newSections.map(({ id, title }) => {
         const { component, preview } = generateSectionData({
           title,
           type: id,
         });
 
-        return {
-          id,
-          component,
-          preview,
-          title,
-        };
+        return { id, component, preview, title };
       });
 
-      const sortedSections = [...sections, ...formatAddedSections].sort(
-        (a, b) => {
-          const indexA = savedSections.findIndex(item => item.id === a.id);
-          const indexB = savedSections.findIndex(item => item.id === b.id);
-          return indexA - indexB;
-        }
-      );
+      // Combine existing sections with new sections and sort them based on the saved order
+      const allSections = [...filteredSections, ...formattedNewSections];
+      const sortedSections = allSections.sort((a, b) => {
+        const indexA = savedSections.findIndex(item => item.id === a.id);
+        const indexB = savedSections.findIndex(item => item.id === b.id);
+        return indexA - indexB;
+      });
+
+      // Update the state with the sorted sections
       setSections(sortedSections);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

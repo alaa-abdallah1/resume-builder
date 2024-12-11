@@ -12,6 +12,8 @@ const Preview = (props: Props) => {
   const { data } = props;
 
   const value = data?.items?.[0] as React.ReactNode;
+  if (!value) return null;
+
   return (
     <div className="space-y-2">
       <SectionHeader title={DEAFAULT_ABOUT_TITLE} />

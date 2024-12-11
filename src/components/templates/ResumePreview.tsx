@@ -4,6 +4,8 @@ import { usePrint } from "@/hooks";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button-variants";
 
 interface ResumePreviewProps {
   data: Mixed;
@@ -56,8 +58,15 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({
       </div>
 
       <Dialog>
-        <DialogTrigger className="w-full lg:hidden">
-          <Button className="w-full">Preview</Button>
+        <DialogTrigger
+          className={cn(
+            buttonVariants({
+              variant: "default",
+            }),
+            "w-full lg:hidden"
+          )}
+        >
+          Preview
         </DialogTrigger>
         <DialogContent className="max-h-full screen:max-w-screen overflow-y-scroll">
           <DialogTitle>Preview Resume</DialogTitle>
