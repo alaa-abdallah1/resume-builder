@@ -66,3 +66,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  .page-break {
+    display: block !important; /* Show all pages during printing */
+  }
+}
+
+body {
+  @apply bg-slate-100
+}

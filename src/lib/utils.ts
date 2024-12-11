@@ -1,4 +1,4 @@
-import { FormPayload } from "@/types";
+import { ComponentSection, FormPayload } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -25,5 +25,18 @@ export const formatDate = (
   return formattedDate;
 };
 
-export const getSavedData = (key: string): FormPayload =>
+export const getSavedData = () =>
+  JSON.parse(localStorage.getItem("formData") || "{}");
+
+export const setSavedData = (newData: FormPayload) =>
+  localStorage.setItem("formData", JSON.stringify(newData));
+
+export const getSavedDataitems = (key: string): FormPayload =>
   JSON.parse(localStorage.getItem("formData") || "{}")?.[key];
+
+export const setSectionsData = (sections: ComponentSection[]) => {
+  localStorage.setItem("sectionsOrder", JSON.stringify(sections));
+};
+
+export const getSectionsData = (): ComponentSection[] =>
+  JSON.parse(localStorage.getItem("sectionsOrder") || "[]");

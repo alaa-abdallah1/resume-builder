@@ -1,14 +1,15 @@
-import { Icon, SectionHeader } from "@/components/atoms";
+import { SectionHeader } from "@/components/atoms";
 import { DatePickerField } from "@/components/molecules";
 import { AppForm } from "@/components/organisms";
 import { DEFAULT_INITIAL_INFO_VALUES } from "@/constants";
-import { formatDate, getSavedData } from "@/lib/utils";
+import { formatDate, getSavedDataitems } from "@/lib/utils";
 import { ComponentProps, FieldType, FormDataType, Mixed } from "@/types";
 import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
 } from "@radix-ui/react-collapsible";
+import { ChevronsUpDown } from "lucide-react";
 import { useCallback, useState } from "react";
 
 const FORM_TITLE = "Personal Details";
@@ -19,7 +20,7 @@ type Props = ComponentProps & {
 
 const Form = (props: Props) => {
   const { dataKey, onChange } = props;
-  const savedData = getSavedData(dataKey);
+  const savedData = getSavedDataitems(dataKey);
 
   const [info, setInfo] = useState<Record<string, Mixed>>(
     savedData?.items?.[0] ?? DEFAULT_INITIAL_INFO_VALUES
@@ -116,11 +117,10 @@ const Form = (props: Props) => {
     <div className="space-y-4">
       <SectionHeader size="lg" title={FORM_TITLE} />
       <AppForm data={info} fields={contactFields} onChange={handleChange} />
-
       <Collapsible className="space-y-4">
         <CollapsibleTrigger className="text-blue-500 font-semibold flex items-center gap-x-2">
           Edit additional details
-          <Icon name="arrows" />
+          <ChevronsUpDown className="h-4 w-4" />
         </CollapsibleTrigger>
         <CollapsibleContent>
           <AppForm data={info} fields={addressFields} onChange={handleChange} />

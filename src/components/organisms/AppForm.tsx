@@ -1,7 +1,6 @@
 import { ChangeEvent } from "react";
 import { InputField } from "../molecules";
 import { FieldType, FormDataType } from "@/types";
-import { cn } from "@/lib/utils";
 
 type Props = {
   data: FormDataType;
@@ -13,7 +12,7 @@ export const AppForm = (props: Props) => {
   const { fields, data, onChange } = props;
 
   return (
-    <div className={cn("grid w-full grid-cols-2 items-center gap-4")}>
+    <div className="grid w-full grid-cols-2 items-center gap-4">
       {fields.map((field, index) => {
         const {
           name,

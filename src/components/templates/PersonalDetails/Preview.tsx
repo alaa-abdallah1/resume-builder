@@ -32,7 +32,7 @@ const Preview = (props: Props) => {
         if (!value) return null;
 
         return (
-          <p key={index} className="text-sm flex gap-x-1 ">
+          <p key={index} className="text-sm flex gap-x-1">
             <Icon
               name={key as SvgIconName}
               className="shrink-0 relative top-1"

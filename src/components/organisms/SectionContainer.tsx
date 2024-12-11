@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronsUpDown, PlusIcon, Trash2 } from "lucide-react";
 import { DEAFAULT_TITLE, DEAFAULT_VALUE } from "@/constants";
-import { getSavedData } from "@/lib/utils";
+import { getSavedDataitems } from "@/lib/utils";
 
 type Props = {
   dataKey: string;
@@ -36,7 +36,7 @@ export const SectionContainer = (props: Props) => {
     titleKey = "title",
   } = props;
 
-  const savedData = getSavedData(dataKey);
+  const savedData = getSavedDataitems(dataKey);
 
   const [sectionTitle, setSectionTitle] = useState(savedData?.title ?? title);
   const [data, setData] = useState<FormDataType[]>(savedData?.items ?? []);

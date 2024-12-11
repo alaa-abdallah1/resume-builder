@@ -1,32 +1,27 @@
-import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+
+import { ComponentSection, FormDataType, Mixed } from "@/types";
 import {
-  PersonalDetailsForm,
-  AboutForm,
-  ResumePreview,
-  SkillsForm,
-  AboutPreview,
-  SkillsPreview,
   PersonalDetailsTopInfoPreview,
+  PersonalDetailsForm,
   PersonalDetailsPreview,
-  CertificatesForm,
-  CertificatesPreview,
-  EducationForm,
-  EducationPreview,
+  AboutForm,
+  AboutPreview,
+  SkillsForm,
+  SkillsPreview,
   EmploymentsForm,
   EmploymentsPreview,
+  EducationForm,
+  EducationPreview,
+  CertificatesForm,
+  CertificatesPreview,
+  SectionList,
+  ResumePreview,
 } from "@/components";
-import {
-  ComponentSection,
-  FormDataType,
-  Mixed,
-  SortedComponentSection,
-} from "@/types";
-import { GripVertical } from "lucide-react";
+import { getSavedData, getSectionsData, setSavedData } from "@/lib/utils";
 
 function App() {
-  const savedData = JSON.parse(localStorage.getItem("formData") || "{}");
-
-  const [data, setData] = useState<Mixed>(savedData);
+  const [data, setData] = useState<Mixed>(getSavedData());
   const [sections, setSections] = useState<ComponentSection[]>([
     {
       id: "personalDetails",
@@ -61,94 +56,41 @@ function App() {
 
   const handleSubmit = useCallback(
     (formData: FormDataType, key: string) => {
-      const newData = {
-        ...data,
-        [key]: formData,
-      };
+      const newData = { ...data, [key]: formData };
       setData(newData);
-      localStorage.setItem("formData", JSON.stringify(newData));
+      setSavedData(newData);
     },
     [data]
   );
 
-  // Load the saved data and sections order from localStorage
   useEffect(() => {
-    const savedSections = localStorage.getItem("sectionsOrder");
-
+    const savedSections = getSectionsData();
     if (savedSections) {
-      const sortOrder: SortedComponentSection[] = JSON.parse(savedSections);
-
       const sortedSections = [...sections].sort((a, b) => {
-        const indexA = sortOrder.findIndex(item => item.id === a.id);
-        const indexB = sortOrder.findIndex(item => item.id === b.id);
+        const indexA = savedSections.findIndex(item => item.id === a.id);
+        const indexB = savedSections.findIndex(item => item.id === b.id);
         return indexA - indexB;
       });
-
       setSections(sortedSections);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Handle drag and drop
-  const handleDragStart = (e: React.DragEvent, index: number) => {
-    e.dataTransfer.setData("draggedIndex", index.toString());
-  };
-
-  const handleDrop = (e: React.DragEvent, dropIndex: number) => {
-    const draggedIndex = Number(e.dataTransfer.getData("draggedIndex"));
-    const updatedSections = [...sections];
-    const draggedSection = updatedSections.splice(draggedIndex, 1)[0];
-    updatedSections.splice(dropIndex, 0, draggedSection);
-    setSections(updatedSections);
-
-    // Save the updated section order to localStorage
-    localStorage.setItem("sectionsOrder", JSON.stringify(updatedSections));
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault(); // This is required to allow dropping
-  };
-
   return (
-    <div className="h-screen w-full max-8 mx-auto">
-      <h1 className="text-3xl font-bold mb-4 text-center py-3">
+    <div>
+      <h1 className="text-4xl bg-white font-bold mb-6 text-center py-6">
         Resume Builder
       </h1>
-
-      <div className="grid md:grid-cols-2 h-full">
-        <div className="p-4 bg-white w-full overflow-y-scroll md:p-8 space-y-8">
-          {sections.map((section, index) => {
-            const { id, component: FieldComponent, noDrag } = section;
-            const isDraggable = !noDrag;
-            return (
-              <div
-                key={id + index}
-                className="mb-4"
-                draggable={isDraggable}
-                onDragStart={e => isDraggable && handleDragStart(e, index)}
-                onDrop={e => isDraggable && handleDrop(e, index)}
-                onDragOver={e => isDraggable && handleDragOver(e)}
-              >
-                <div className="flex items-start">
-                  {isDraggable && (
-                    <GripVertical className="me-2 relative top-2 cursor-pointer" />
-                  )}
-                  <Suspense fallback={<div>Loading...</div>}>
-                    {FieldComponent && (
-                      <FieldComponent
-                        dataKey={id}
-                        onChange={(e: Mixed) => handleSubmit(e, id)}
-                      />
-                    )}
-                  </Suspense>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="bg-slate-100 overflow-y-auto p-8">
-          <ResumePreview data={data} sections={sections} />
+      <div className="h-screen w-full max-w-screen mx-auto">
+        <div className="grid 2xl:grid-cols-2 h-full gap-4 screen:p-0 p-6">
+          <SectionList
+            sections={sections}
+            setSections={setSections}
+            handleSubmit={handleSubmit}
+          />
+          <div className="p-6 pt-0">
+            <ResumePreview data={data} sections={sections} />
+          </div>
         </div>
       </div>
     </div>

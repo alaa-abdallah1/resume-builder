@@ -3,3 +3,4 @@ export * from "./SelectField";
 export * from "./DatePickerField";
 export * from "./FieldWrapper";
 export * from "./TextEditorField";
+export * from "./Pagination";
