@@ -13,6 +13,10 @@ module.exports = {
       },
       maxWidth: {
         screen: "1920px",
+        lg: "1024px",
+      },
+      minWidth: {
+        lg: "1024px",
       },
       screens: {
         screen: "1920px",

@@ -9,7 +9,7 @@ export const DescreiptionPreview = (props: Props) => {
 
   return (
     <p
-      className="[&>ul]:list-disc [&>ul>li]:list-outside [&>ul>li]:ml-5 [&>ol]:list-decimal [&>ol>li]:list-outside [&>ol>li]:ml-5"
+      className="[&>ul]:list-disc [&>ul>li]:list-outside [&>ul>li]:ml-5 [&>ol]:list-decimal [&>ol>li]:list-outside [&>ol>li]:ml-5 text-sm"
       dangerouslySetInnerHTML={{ __html: String(value ?? "") }}
     />
   );

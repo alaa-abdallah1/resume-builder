@@ -5,6 +5,11 @@ import { formatDate } from "@/lib/utils";
 import { DEFAULT_INITIAL_VALUES } from "@/constants";
 
 export const Form = (_props: ComponentProps) => {
+  const {
+    title = "Educations",
+    description = "A diverse educational background on your resume underscores the unique value and perspective you bring to a position.",
+  } = _props;
+
   const fields: FieldType[] = [
     {
       name: "title",
@@ -42,8 +47,8 @@ export const Form = (_props: ComponentProps) => {
   return (
     <SectionContainer
       {..._props}
-      title="Educations"
-      description="A diverse educational background on your resume underscores the unique value and perspective you bring to a position."
+      title={title}
+      description={description}
       fields={fields}
       valueKey="location"
       defaultItem={DEFAULT_INITIAL_VALUES}

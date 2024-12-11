@@ -103,7 +103,6 @@ const Form = (props: Props) => {
   // Memoizing the onChange handler to prevent unnecessary re-renders
   const handleChange = useCallback(
     (newInfo: Record<string, string | number>) => {
-      console.log("hhhii");
       setInfo({ ...info, ...newInfo });
       onChange({
         title: FORM_TITLE,

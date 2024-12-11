@@ -1,5 +1,5 @@
 import { SvgIconName } from "@/assets/icons/paths.svg";
-import { Icon, SectionHeader } from "@/components/atoms";
+import { Icon } from "@/components/atoms";
 import { Contact, FormPayload } from "@/types";
 
 type Props = {
@@ -27,20 +27,23 @@ const Preview = (props: Props) => {
 
   return (
     <div className="space-y-2">
-      <SectionHeader title="Contact" className="truncate" />
-      {Object.entries(formattedData).map(([key, value], index) => {
-        if (!value) return null;
+      <div className="gap-2 flex flex-wrap">
+        {Object.entries(formattedData).map(([key, value], index) => {
+          if (!value) return null;
 
-        return (
-          <p key={index} className="text-sm flex gap-x-1">
-            <Icon
-              name={key as SvgIconName}
-              className="shrink-0 relative top-1"
-            />
-            {value}
-          </p>
-        );
-      })}
+          return (
+            <p key={index} className="text-sm flex gap-x-1">
+              <Icon
+                name={key as SvgIconName}
+                className="shrink-0 relative top-0.5"
+              />
+              {value}
+            </p>
+          );
+        })}
+      </div>
+
+      <hr className="my-4" />
     </div>
   );
 };

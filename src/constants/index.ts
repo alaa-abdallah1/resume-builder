@@ -26,3 +26,9 @@ export const DEFAULT_INITIAL_INFO_VALUES = {
   placeOfBirth: "",
   dateOfBirth: "",
 };
+
+export const CUSTOM_SECTIONS = {
+  projects: "Projects",
+  languages: "Languages",
+  courses: "Courses",
+};

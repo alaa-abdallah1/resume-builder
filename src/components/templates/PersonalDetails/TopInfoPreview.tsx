@@ -15,7 +15,6 @@ const Preview = (props: Props) => {
         {values?.firstName} {values?.lastName}
       </h1>
       <p className="italic">{values?.jobTitle}</p>
-      <hr className="my-4" />
     </div>
   );
 };

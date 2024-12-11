@@ -22,12 +22,14 @@ type Props = {
   fields?: FieldType[];
   defaultItem?: FormDataType;
   onChange?: (data: FormPayload) => void;
+  onDelete?: (dataKey: string) => void;
 };
 
 export const SectionContainer = (props: Props) => {
   const {
     dataKey,
     onChange,
+    onDelete,
     fields = [],
     description = "",
     title = "Title",
@@ -52,12 +54,26 @@ export const SectionContainer = (props: Props) => {
   return (
     <div className="space-y-6">
       <div className="space-y-4">
-        <InputField
-          type="text"
-          value={sectionTitle}
-          className="max-w-[320px] font-medium capitalize border-none"
-          onChange={e => setSectionTitle(e.target.value)}
-        />
+        <div className="flex items-center justify-between">
+          <InputField
+            type="text"
+            value={sectionTitle}
+            className="max-w-[320px] font-medium capitalize border-none"
+            onChange={e => setSectionTitle(e.target.value)}
+          />
+
+          <AppAlertDialog
+            triggerText={
+              <div className="cursor-pointer bg-gray-100 p-2 rounded-full">
+                <Trash2 className="h-4 w-4 cursor-pointer" />
+              </div>
+            }
+            title="Would you like to delete this section?"
+            cancelText="No, go back"
+            actionText="Yes, proceed"
+            onAction={() => onDelete?.(dataKey)}
+          />
+        </div>
         <p className="text-sm text-muted-foreground ">{description}</p>
       </div>
 

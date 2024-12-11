@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useReactToPrint } from "react-to-print";
 
 export const usePrint = (selectedTemplate: Mixed, previewRef: Mixed) => {
-  console.log("selectedTemplate: ", selectedTemplate);
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePrint = useReactToPrint({

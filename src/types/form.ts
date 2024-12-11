@@ -30,6 +30,8 @@ export type SectionPreviewType = {
 export type SortedComponentSection = {
   id: string;
   noDrag?: boolean;
+  title?: string;
+  description?: string;
 };
 
 export type ComponentSection = SortedComponentSection & {
@@ -39,5 +41,8 @@ export type ComponentSection = SortedComponentSection & {
 
 export type ComponentProps = {
   dataKey: string;
+  title?: string;
+  description?: string;
   onChange?: (data: FormPayload) => void;
+  onDelete?: (dataKey: string) => void;
 };

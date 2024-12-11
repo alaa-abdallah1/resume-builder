@@ -9,12 +9,14 @@ interface SectionListProps {
   sections: ComponentSection[];
   setSections: React.Dispatch<React.SetStateAction<ComponentSection[]>>;
   handleSubmit: (formData: FormDataType, key: string) => void;
+  handleDelete: (dataKey: string) => void;
 }
 
 export const SectionList: React.FC<SectionListProps> = ({
   sections,
   setSections,
   handleSubmit,
+  handleDelete,
 }) => {
   const handleReorder = (updatedSections: ComponentSection[]) => {
     setSections(updatedSections);
@@ -32,7 +34,7 @@ export const SectionList: React.FC<SectionListProps> = ({
         isOver,
         startDrag,
       }) => {
-        const { id, component: FieldComponent } = section;
+        const { id, component: FieldComponent, title, description } = section;
 
         if (!FieldComponent) return null;
 
@@ -64,7 +66,10 @@ export const SectionList: React.FC<SectionListProps> = ({
                 <div className="flex-1">
                   <FieldComponent
                     dataKey={id}
+                    title={title}
+                    description={description}
                     onChange={(e: Mixed) => handleSubmit(e, id)}
+                    onDelete={handleDelete}
                   />
                 </div>
               </Suspense>

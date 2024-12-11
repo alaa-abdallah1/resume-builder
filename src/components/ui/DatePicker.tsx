@@ -49,6 +49,11 @@ export function DatePicker(props: DatePickerProps) {
           selected={date as Date}
           onSelect={onSelect}
           initialFocus
+          footer={
+            <Button className="mt-2" onClick={() => onSelect(undefined)}>
+              Clear
+            </Button>
+          }
         />
       </PopoverContent>
     </Popover>
