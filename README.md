@@ -29,6 +29,15 @@ A key aspect of this challenge was the effective use of Large Language Model (LL
 - **Yarn** or **npm** for installing dependencies
 - A modern browser (Chrome, Firefox, Safari, Edge) for testing
 
+
+## Recording of LLM Prompt Usage
+
+A short screencast is provided separately (as per the challenge instructions) showing the prompts history with the chosen LLM (e.g., ChatGPT). This video demonstrates how the LLM was integrated into the workflow, including solution brainstorming, code snippets, and troubleshooting steps.
+
+Watch this video.
+
+https://vimeo.com/1038212029/072360ac49?share=copy
+
 ## Installation
 
 1. **Clone the Repository**:
@@ -71,6 +80,11 @@ Below is a simplified overview of the project structure:
 
 ![image](https://github.com/user-attachments/assets/7bf6e872-022e-4180-acca-69fa562a67f9)
 
+## Generated Resume By This App
+
+![image](https://github.com/user-attachments/assets/996a705d-aeda-4f57-b6fd-4a5134c31088)
+
+
 **Key directories and files**:
 
 - `components/` contains all UI and form components.
@@ -93,9 +107,6 @@ Below is a simplified overview of the project structure:
 - **LLM Assistance**: LLM tools were used to accelerate development, troubleshoot issues, and refine code. The prompts, discussions, and suggestions provided by the LLM helped shape the final solution quickly.
 - **Code Splitting**: `React.lazy()` and `Suspense` are used for the text editor to improve initial load times and reduce bundle size.
 
-## Recording of LLM Prompt Usage
-
-A short screencast is provided separately (as per the challenge instructions) showing the prompts history with the chosen LLM (e.g., ChatGPT). This video demonstrates how the LLM was integrated into the workflow, including solution brainstorming, code snippets, and troubleshooting steps.
 
 ## Future Improvements
 
